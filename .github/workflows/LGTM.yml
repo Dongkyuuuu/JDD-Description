@@ -20,8 +20,16 @@ jobs:
             @{{ author }}
             LGTM
 
+      # - name: Add AutoMerge label
+      #   uses: actions-ecosystem/action-add-labels@v1
+      #   with:
+      #     labels: automerge
+
       - id: automerge
         name: AutoMerge
         uses: pascalgn/automerge-action@v0.15.5
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_LABELS: ""
+          MERGE_REMOVE_LABELS: "automerge"
+          MERGE_METHOD: "squash"
