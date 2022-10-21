@@ -1,0 +1,18 @@
+name: AUTO_LGTM
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  looks_good_to_me_for_owner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wow-actions/auto-comment@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          issuesOpenedReactions: "hooray, +1"
+          pullRequestOpened: |
+            @{{ author }}
+            LGTM
