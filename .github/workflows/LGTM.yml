@@ -9,6 +9,8 @@ jobs:
   looks_good_to_me_for_owner:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: LGTM Comment
         uses: wow-actions/auto-comment@v1
         with:
@@ -18,8 +20,15 @@ jobs:
             @{{ author }}
             LGTM
 
+      - name: Add AutoMerge label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: automerge
+
       - id: automerge
-        name: Auto Merge
+        name: AutoMerge
         uses: pascalgn/automerge-action@v0.15.5
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_REMOVE_LABELS: "automerge"
+          MERGE_METHOD: "squash"
