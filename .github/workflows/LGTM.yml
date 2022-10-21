@@ -9,10 +9,16 @@ jobs:
   looks_good_to_me_for_owner:
     runs-on: ubuntu-latest
     steps:
-      - uses: wow-actions/auto-comment@v1
+      - name: LGTM Comment
+        uses: wow-actions/auto-comment@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          issuesOpenedReactions: "hooray, +1"
+          pullRequestOpenedReactions: "hooray, +1"
           pullRequestOpened: |
             @{{ author }}
             LGTM
+
+      - name: Auto Merge
+        uses: pascalgn/automerge-action@v0.15.5
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
