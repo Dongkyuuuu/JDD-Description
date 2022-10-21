@@ -18,7 +18,8 @@ jobs:
             @{{ author }}
             LGTM
 
-      - name: Auto Merge
+      - id: automerge
+        name: Auto Merge
         uses: pascalgn/automerge-action@v0.15.5
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
